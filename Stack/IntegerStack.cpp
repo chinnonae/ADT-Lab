@@ -63,7 +63,9 @@ Stack::T Stack::top()
 Stack::T Stack::pop()
 {
   Node* temp = top_node;
+  T val = temp->value;
   top_node = top_node->next;
+  delete temp;
   return temp->value;
 
 }
