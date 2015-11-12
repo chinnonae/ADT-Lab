@@ -49,7 +49,7 @@ main()
 {
   while(!cin.eof()) {
     int i,j;
-
+8
     cin >> i;
     if(cin.eof()) {
       break;
