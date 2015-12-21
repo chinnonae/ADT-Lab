@@ -28,8 +28,8 @@ int read_input(){
         nodes[i] = pair<int, int>(x, y);
     }
     nodes[n+1] = pair<int, int>(100, 100);
-    for(int i = 0 ; i <= n+1; i++)
-        cout << "__" << nodes[i].first << ", " << nodes[i].second << endl;
+   // for(int i = 0 ; i <= n+1; i++)
+  //     cout << "__" << nodes[i].first << ", " << nodes[i].second << endl;
 }
 
 int dist(int x1,int y1,int x2,int y2){
@@ -50,7 +50,8 @@ void create_path(){
     }
 }
 
-void bfs(int node){
+int bfs(int node){
+    int level = 0;
     queue<int> q;
     q.push(node);
     visited[node] = true;
@@ -60,14 +61,51 @@ void bfs(int node){
         vector<int> vec = adj[t];
         for(int i = 0; i < deg[t]; i++){
             int u = vec[i];
+            if(u == n+1) return level;
             if(!visited[u]){
                 visited[u] = true;
                 q.push(u);
             }
         }
+        level++;
     }
 
 }
+
+
+
+int bfs(int node, int level){
+    cout << "--" << node << endl;
+    queue<int> q;
+    if(node == n+1) cout << n <<  "helo " << level << endl;
+    if(node == n+1) return level;
+    visited[node] = true;
+    vector<int> vec = adj[node];
+    for(int i = 0; i < vec.size(); i++){
+        if(!visited[vec[i]]){
+            visited[vec[i]] = true;
+            q.push(vec[i]);
+        }
+    }
+    int min;
+    if(!q.empty()){
+        min = bfs(q.front(),level+1);
+        q.pop();
+    }else{
+        min = 2147483647;
+    }
+    while(!q.empty()){
+        int temp = bfs(q.front(), level+1);
+        q.pop();
+        if(temp < min){
+            min = temp;
+        }
+    }
+    cout << "min " << min << endl;
+    return min;
+
+}
+
 
 int main(){
     read_input();
@@ -78,7 +116,7 @@ int main(){
         }
         cout << endl;
     }
-    bfs(0);
+    cout << bfs(0) << endl;
 
 }
 

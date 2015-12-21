@@ -35,9 +35,6 @@ int main(){
             upper = *upiter;
         }
 
-        cout << "-" << lower << endl;
-        cout << "-" << upper << endl;
-
         if(lower == 0){
             cout << upper << endl;
         }else if(upper == 0){
@@ -48,10 +45,5 @@ int main(){
             cout << lower << endl;
         }
     }
-
-    for(set<int>::iterator iter = ns.begin(); iter != ns.end(); iter++){
-        cout << "---" << *iter << endl;
-    }
-
 
 }
